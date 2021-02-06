@@ -262,9 +262,9 @@ public class MyArrayList {
     }
 
     public static void main(String[] args) {
-//        testRemove();
-//        testGetAndSet();
-//        testContainsAndIndexOf();
+        testRemove();
+        testGetAndSet();
+        testContainsAndIndexOf();
         testSizeEmptyClear();
     }
 }

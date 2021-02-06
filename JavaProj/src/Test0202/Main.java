@@ -27,7 +27,7 @@ public class Main {
 
         // 2. 遍历链表, 找到链表的最后一个节点
 //        head = null; // 链表的头节点是 null, 此时就表示一个空的链表(一个节点都没有的链表)
-//
+
 //        Node cur = head;
 //        while (cur != null && cur.next != null) {
 //            cur = cur.next;
@@ -47,7 +47,7 @@ public class Main {
         // 4. 取链表的第 N 个节点. (从 1 开始算的)
 //        int N = 3;
 //        Node cur = head;
-        // 走 N - 1 步
+//        // 走 N - 1 步
 //        for (int i = 1; i < N; i++) {
 //            cur = cur.next;
 //        }
@@ -67,17 +67,17 @@ public class Main {
         // 正数第 3 个 = size + 1 - N
 
         // 6. 遍历链表, 查找链表上是否存在某个元素
-//        int toFind = 3;
-//        Node cur = head;
-//        for (; cur != null; cur = cur.next) {
-//            if (cur.val == toFind) {
-//                break;
-//            }
-//        }
-//        if (cur != null) {
-//            System.out.println("找到了");
-//        } else {
-//            System.out.println("没找到");
-//        }
+        int toFind = 3;
+        Node cur = head;
+        for (; cur != null; cur = cur.next) {
+            if (cur.val == toFind) {
+                break;
+            }
+        }
+        if (cur != null) {
+            System.out.println("找到了");
+        } else {
+            System.out.println("没找到");
+        }
     }
 }
