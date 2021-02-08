@@ -95,8 +95,8 @@ public class Solution {
         c.next = d;
         d.next = null;
         Solution solution = new Solution();
-//        ListNode result = solution.removeElements(a,2);
-        ListNode result = solution.reverseList(a);
+        ListNode result = solution.removeElements(a,2);
+//        ListNode result = solution.reverseList(a);
         print(result);
     }
 }
