@@ -1,6 +1,6 @@
-package Test_day2;
+package Homework;
 
-public class Test {
+public class Test_day2 {
     public static int removeElement(int[] nums, int val) {
         if (nums == null || nums.length == 0)
             return 0;
@@ -32,7 +32,7 @@ public class Test {
 //        }
 
         int arr[] = {1,3,5,6};
-        int k = 5;
+        int k = 4;
         int len = searchInsert(arr,k);
         System.out.println(len);
     }

@@ -1,6 +1,6 @@
-package Test_day3;
+package Homework;
 
-public class Test {
+public class Test_day3 {
     public static int getValue(int i) {
         int result = 0;
         switch (i) {
@@ -56,8 +56,8 @@ public class Test {
 
 //        System.out.println(getValue(2));
 
-//        System.out.println(canConstruct("a","bc"));
+//        System.out.println(canConstruct("ab","abc"));
 
-        System.out.println(isPalindrome(121));
+        System.out.println(isPalindrome(1234321));
     }
 }

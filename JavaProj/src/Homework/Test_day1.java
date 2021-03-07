@@ -1,6 +1,6 @@
-package Test_day1;
+package Homework;
 
-    public class Test {
+    public class Test_day1 {
         public static void  mystery(int x){
             System.out.print(x % 10);
             if ((x / 10) != 0){
@@ -37,17 +37,17 @@ package Test_day1;
 //            int x=20,y=5;
 //            System.out.println(x+y+" "+(x+y)+y);
 
-//            mystery(1234);
+            mystery(1234);
 
 //            String str="DENG";
 //            System.out.println(toLowerCase(str));
 
-            int arr[] = {1,2,3,4,5};
-            int k = 3;
-            int arry[] = rotate(arr,k);
-            for(int i=0;i<arry.length;i++){
-                System.out.print(arry[i]+" ");
-            }
+//            int arr[] = {1,2,3,4,5};
+//            int k = 3;
+//            int arry[] = rotate(arr,k);
+//            for(int i=0;i<arry.length;i++){
+//                System.out.print(arry[i]+" ");
+//            }
         }
     }
 
