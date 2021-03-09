@@ -14,14 +14,15 @@ public class LinkedList8 {
             return true;
         }
         // 1. 把原来的链表复制一份.
+        //创建一个带傀儡结点的链表
         ListNode newHead = new ListNode(0);
         ListNode newTail = newHead;
-        // 遍历原来的链表
+        // 遍历原来的链表，进行尾插
         for (ListNode cur = A; cur != null; cur = cur.next) {
             newTail.next = new ListNode(cur.val);
             newTail = newTail.next;
         }
-        // B 是一个不带傀儡结点的新链表
+        // B 是一个复制出来的不带傀儡结点的新链表
         ListNode B = newHead.next;
         // 2. 把新链表逆置
         ListNode prev = null;

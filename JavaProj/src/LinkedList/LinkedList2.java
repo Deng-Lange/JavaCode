@@ -23,7 +23,7 @@ public class LinkedList2 {
                 // 也就是反转后的新链表的头结点
                 newHead = curNode;
             }
-            // 逆向
+            // 逆向 关键一步
             curNode.next = prevNode;
             // 更新引用的位置
             prevNode = curNode;
