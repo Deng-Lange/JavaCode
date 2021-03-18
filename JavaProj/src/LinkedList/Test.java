@@ -2,8 +2,8 @@ package LinkedList;
 
 public class Test {
     public int getLength(ListNode head) {
-        int length = 0;
-        for (ListNode cur = head; cur != null; cur = cur.next) {
+        int length=0;
+        for(ListNode cur=head;cur!=null;cur=cur.next){
             length++;
         }
         return length;
@@ -38,7 +38,7 @@ public class Test {
     //快慢指针法:创建两个引用 fast，slow，fast每次走两步，slow每次走一步，
     //如果链表不带环，fast就会率先到达终点 null；如果链表带环，fast 就会追上 slow
     public boolean hasCycle(ListNode head) {
-        if(head==null||head.next==null){
+        if(head==null&&head.next==null){
             return false;
         }
         ListNode fast=head;
@@ -85,37 +85,34 @@ public class Test {
 
     //对于一个链表，判断其是否为回文结构
     public boolean chkPalindrome(ListNode A) {
-        if (A == null) {
+        if(A==null||A.next==null){
             return true;
         }
-        if (A.next == null) {
-            return true;
+        ListNode newHead=new ListNode(0);
+        ListNode newTail=newHead;
+        for(ListNode cur=A;cur!=null;cur=cur.next){
+            newTail.next=new ListNode(cur.val);
+            newTail=newTail.next;
         }
-        ListNode newHead = new ListNode(0);
-        ListNode newTail = newHead;
-        for (ListNode cur = A; cur != null; cur = cur.next) {
-            newTail.next = new ListNode(cur.val);
-            newTail = newTail.next;
-        }
-        ListNode B = newHead.next;
-        ListNode prev = null;
-        ListNode cur = B;
-        while (cur != null) {
-            if (cur.next == null) {
-                B = cur;
+        ListNode B=newHead.next;
+        ListNode prev=null;
+        ListNode cur=B;
+        while(cur!=null){
+            if(cur.next==null){
+                B=cur;
             }
-            cur.next = prev;
-            prev = cur;
-            cur = cur.next;
+            cur.next=prev;
+            prev=cur;
+            cur=cur.next;
         }
-        ListNode cur1 = A;
-        ListNode cur2 = B;
-        while (cur1 != null && cur2 != null) {
-            if (cur1.val != cur2.val) {
+        ListNode cur1=A;
+        ListNode cur2=B;
+        while(cur1!=null&&cur2!=null){
+            if(cur1!=cur2){
                 return false;
             }
-            cur1 = cur1.next;
-            cur2 = cur2.next;
+            cur1=cur1.next;
+            cur2=cur2.next;
         }
         return true;
     }
@@ -123,25 +120,25 @@ public class Test {
     // 在一个排序的链表中存在重复的结点，请删除该链表中重复的结点，
     // 重复的结点不保留，返回链表头指针
     public ListNode deleteDuplication(ListNode pHead) {
-        if (pHead == null) {
+        if(pHead==null){
             return null;
         }
-        if (pHead.next == null) {
+        if(pHead.next==null){
             return pHead;
         }
-        ListNode newHead = new ListNode(0);
-        ListNode newTail = newHead;
-        ListNode cur = pHead;
-        while (cur != null) {
-            if (cur.next != null && cur.val == cur.next.val) {
-                while (cur != null && cur.next != null && cur.val == cur.next.val) {
-                    cur = cur.next;
+        ListNode newHead=new ListNode(0);
+        ListNode newTail=newHead;
+        ListNode cur=pHead;
+        while(cur!=null){
+            if(cur.next!=null&&cur.val==cur.next.val){
+                while(cur!=null&&cur.next!=null&&cur.val==cur.next.val){
+                    cur=cur.next;
                 }
-            } else {
-                newTail.next = new ListNode(cur.val);
-                newTail = newTail.next;
+            }else{
+                newTail.next=new ListNode(cur.val);
+                newTail=newTail.next;
             }
-            cur = cur.next;
+            cur=cur.next;
         }
         return newHead.next;
     }
@@ -150,26 +147,26 @@ public class Test {
     // 处理一般情况，需要创建两个链表，用来保存两部分结果。
     // 最后需要把两个链表合并成一个，直接首尾相接即可。
     public ListNode partition (ListNode pHead,int x){
-        if (pHead == null) {
+        if(pHead==null){
             return null;
         }
-        if (pHead.next == null) {
+        if(pHead.next==null){
             return pHead;
         }
         ListNode smallHead = new ListNode(0);
         ListNode smallTail = smallHead;
         ListNode largeHead = new ListNode(0);
         ListNode largeTail = largeHead;
-        for (ListNode cur = pHead; cur != null; cur = cur.next) {
-            if (cur.val < x) {
-                smallTail.next = new ListNode(cur.val);
-                smallTail = smallTail.next;
-            } else {
-                largeTail.next = new ListNode(cur.val);
-                largeTail = largeTail.next;
+        for(ListNode cur=pHead;cur!=null;cur=cur.next){
+            if(cur.val<x){
+                smallTail.next=new ListNode(cur.val);
+                smallTail=smallTail.next;
+            }else{
+                largeTail.next=new ListNode(cur.val);
+                largeTail=largeTail.next;
             }
         }
-        smallTail.next = largeHead.next;
+        smallTail.next=largeHead.next;
         return smallHead.next;
     }
     // 将两个升序链表合并为一个新的升序链表并返回。
@@ -182,107 +179,109 @@ public class Test {
     // 循环以上比较和插入的过程，直到两个引用的其中一个到达 null 即链表末尾；
     // 最后将另一个链表剩余的部分都插入到结果链表的末尾。
     public ListNode mergeTwoLists (ListNode l1, ListNode l2){
-        if (l1 == null) {
+        if(l1==null){
             return l2;
         }
-        if (l2 == null) {
+        if(l2==null){
             return l1;
         }
-        ListNode newHead = new ListNode(0);
-        ListNode newTail = newHead;
-        ListNode cur1 = l1;
-        ListNode cur2 = l2;
-        while (cur1 != null && cur2 != null) {
-            if (cur1.val < cur2.val) {
-                newTail.next = cur1;
-                cur1 = cur1.next;
-            } else {
-                newTail.next = cur2;
-                cur2 = cur2.next;
+        ListNode newHead=new ListNode(0);
+        ListNode newTail=newHead;
+        ListNode cur1=l1;
+        ListNode cur2=l2;
+        while(cur1!=null&&cur2!=null){
+            if(cur1.val<cur2.val){
+                newTail.next=new ListNode(cur1.val);
+                cur1=cur1.next;
+            }else{
+                newTail.next=new ListNode(cur2.val);
+                cur2=cur2.next;
             }
-            newTail = newTail.next;
+            newTail=newTail.next;
         }
-        if (cur1 == null) {
-            newTail.next = cur2;
+        if(cur1.next==null){
+            newTail.next=cur2;
         }
-        if (cur2 == null) {
-            newTail.next = cur1;
+        if(cur2.next==null){
+            newTail.next=cur1;
         }
         return newHead.next;
     }
     //输入一个链表，输出该链表中倒数第 k 个结点。
     //要想得到倒数第 k 个结点，就从头开始走 len-k 步
     public ListNode FindKthToTail (ListNode head,int k){
-        if (head == null) {
+        if(head==null){
             return null;
         }
-        int length = getLength(head);
-        if (k <= 0) {
+        if(k<=0){
             return null;
         }
-        if (k > length) {
+        int len=getLength(head);
+        if(k>len){
             return null;
         }
-        int steps = length - k;
-        ListNode cur = head;
-        for (int i = 0; i < steps; i++) {
-            cur = cur.next;
+        int steps=len-k;
+        ListNode cur=head;
+        for(int i=0;i<steps;i++){
+            cur=cur.next;
         }
         return cur;
     }
     // 给定一个头结点为 head 的非空单链表，返回链表的中间结点。
     // 如果有两个中间结点，则返回第二个中间结点。
+    // 1.先求链表长度
+    // 2.根据链表长度/2的结果，让一个引用从头开始走这些步数即可。
     public ListNode middleNode (ListNode head){
-        if (head == null) {
+        if(head==null){
             return null;
         }
-        int length = getLength(head);
-        int steps = length / 2;
-        ListNode cur = head;
-        for (int i = 0; i < steps; i++) {
-            cur = cur.next;
+        int len=getLength(head);
+        int steps=len/2;
+        ListNode cur=head;
+        for(int i=0;i<steps;i++){
+            cur=cur.next;
         }
         return cur;
     }
     //反转一个单链表
     public ListNode reverseList (ListNode head){
-        if (head == null) {
+        if(head==null){
             return null;
         }
-        if (head.next == null) {
+        if(head.next==null){
             return head;
         }
-        ListNode prev = null;
-        ListNode cur = head;
-        ListNode newHead = null;
-        while (cur != null) {
-            if (cur.next == null) {
-                newHead = cur;
+        ListNode prev=null;
+        ListNode cur=head;
+        ListNode newHead=null;
+        while(cur!=null){
+            if(cur.next==null){
+                newHead=cur;
             }
-            cur.next = prev;
-            prev = cur;
-            cur = cur.next;
+            cur.next=prev;
+            prev=cur;
+            cur=cur.next;
         }
         return newHead;
     }
     //删除链表中等于给定值 val 的所有节点。
     public ListNode removeElements (ListNode head,int val){
-        if (head == null) {
+        if(head==null){
             return null;
         }
-        ListNode prev = head;
-        ListNode cur = prev.next;
-        while (cur != null) {
-            if (cur.val == val) {
-                prev.next = cur.next;
-                cur = prev.next;
-            } else {
-                prev = prev.next;
-                cur = cur.next;
+        ListNode prev=head;
+        ListNode cur=head.next;
+        while(cur!=null){
+            if(cur.val==val){
+                prev.next=cur.next;
+                cur=prev.next;
+            }else{
+                prev=prev.next;
+                cur=cur.next;
             }
         }
-        if (head.val == val) {
-            head = head.next;
+        if(head.val==val){
+            head=head.next;
         }
         return head;
     }

@@ -1,8 +1,6 @@
 package Stack_Queue;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 class Test {
     Stack<Integer> A=new Stack<>();

@@ -202,6 +202,21 @@ public class BinaryTree {
         return result;
     }
 
+    //二叉树的后序遍历
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        // 递归处理左子树
+        result.addAll(postorderTraversal(root.left));
+        // 递归处理右子树
+        result.addAll(postorderTraversal(root.right));
+        // 访问根节点
+        result.add(root.val);
+        return result;
+    }
+
     //检查两棵树是否相同
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
