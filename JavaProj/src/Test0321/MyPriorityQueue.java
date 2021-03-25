@@ -76,7 +76,6 @@ public class MyPriorityQueue {
     // 为了让后续的堆操作比较方便, 使用成员变量的方式来保存堆对应的数组
     private int[] data = new int[1000];
     private int size = 0;
-
     public MyPriorityQueue(int[] data, int size) {
         this.size = size;
         for (int i = 0; i < size; i++) {
@@ -98,6 +97,14 @@ public class MyPriorityQueue {
         //    通过向上调整的方式，从新元素的位置进行向上调整
         //从最后一个元素开始进行调整
         shiftUp(data, size, size - 1);
+    }
+
+    //基于向上调整的方式建堆
+    public void createHeap2(int[] array) {
+        //循环遍历数组，把元素通过 offer 方法插入即可
+        for(int x:array){
+            offer(x);
+        }
     }
 
     // 获取堆顶元素
@@ -149,3 +156,26 @@ public class MyPriorityQueue {
         return stringBuilder.toString();
     }
 }
+/*
+面试题：topk 问题
+
+假设有一亿个数据，找出前 1000 个最大的数字
+使用堆解决 topk 问题，有两种方案：
+方案一、直接针对这一亿个数据的数组，进行建大堆
+       接下来循环 1000 次，进行取堆顶元素/删除堆顶元素操作
+       特点：得到的这前 1000 个数据是有序的
+方案二、创建一个大小为 1000 的小堆，遍历这一亿个数据，依次往堆里插入
+       如果堆没满，直接插入
+       如果堆满了（小堆的堆顶元素就是这个堆里最小的元素），拿当前值和堆顶元素比较
+       如果当前值小于堆顶元素，就 pass
+       如果当前值大于堆顶元素，就删除堆顶元素，将当前值插入堆中
+       特点：效率更高；得到的 1000 个数据不保证顺序
+
+海量数据处理，内存存不下，怎么办
+1、堆
+2、哈希表
+
+100 万亿个数据，内存存不下，找前 1000 个最大数据？（方案二）
+将 100 万亿个数据存到磁盘上，内存中只存大小为 1000 的小堆，
+每次从磁盘上读取一个数据，和堆顶元素比较并更新即可
+ */
