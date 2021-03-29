@@ -258,9 +258,112 @@ public class MySort {
         }
     }
 
+    //归并排序
+    public static void mergeSort(int[] arr) {
+        // 创建一个新的方法辅助递归. 新方法中多了两个参数
+        // 表示是针对当前数组中的哪个部分进行排序
+        // 前闭后开区间
+        _mergeSort(arr, 0, arr.length);
+    }
+    // [left, right) 前闭后开区间
+    // right - left 就是区间中的元素个数
+    public static void _mergeSort(int[] arr, int left, int right) {
+        if (right - left <= 1) {
+            // 如果当前待排序的区间里只有 1 个元素或者没有元素
+            // 就直接返回, 不需要任何排序动作
+            return;
+        }
+        // 先把当前 [left, right) 区间一分为二
+        int mid = (left + right) / 2;
+        // 分成了两个区间
+        // [left, mid)  [mid, right)
+        // 当左侧区间的 _mergeSort 执行完毕后,
+        // 就认为 [left, mid) 就已经是有序区间了
+        _mergeSort(arr, left, mid);
+        // 当右侧区间的 _mergeSort 执行完毕后,
+        // 就认为 [mid, right) 就已经是有序区间了
+        _mergeSort(arr, mid, right);
+        // 接下来把左右两个有序的数组, 合并到一起!!
+        merge(arr, left, mid, right);
+    }
+    // merge 方法本身功能是把两个有序数组合并成一个有序数组.
+    // 待合并的两个数组就分别是:
+    // [left, mid)
+    // [mid, right)
+    public static void merge(int[] arr, int left, int mid, int right) {
+        if (left >= right) {
+            return;
+        }
+        // 创建一个临时的数组, 用来存放合并结果.
+        // 我们是希望这个数组能存下合并后的结果  right - left
+        int[] tmp = new int[right - left];
+        // 当前要把新的元素放到 tmp 数组的哪个下标上
+        int tmpSize = 0;
+        int l = left;
+        int r = mid;
+        while (l < mid && r < right) {
+            // 归并排序是稳定排序!!
+            // 此处的条件不要写作 arr[l] < arr[r]
+            if (arr[l] <= arr[r]) {
+                // arr[l] 比较小, 就把这个元素先插入到 tmp 数组末尾
+                tmp[tmpSize] = arr[l];
+                tmpSize++;
+                l++;
+            } else {
+                // arr[r] 比较小, 就把这个元素插入到 tmp 数组的末尾
+                tmp[tmpSize] = arr[r];
+                tmpSize++;
+                r++;
+            }
+        }
+        // 当其中一个数组遍历完了之后, 就把另外一个数组的剩余部分都拷贝过来
+        while (l < mid) {
+            // 剩下的是左半边数组
+            tmp[tmpSize] = arr[l];
+            tmpSize++;
+            l++;
+        }
+        while (r < right) {
+            // 剩下的是右半边数组
+            tmp[tmpSize] = arr[r];
+            tmpSize++;
+            r++;
+        }
+        // 最后一步, 再把临时空间的内容都拷贝回参数数组中.
+        // 需要把 tmp 中的内容拷贝回 arr 的 [left, right) 这一段空间里
+        // [left, right) 这个空间很可能不是从 0 开始的额.
+        for (int i = 0; i < tmp.length; i++) {
+            arr[left + i] = tmp[i];
+        }
+    }
+
+    public static void mergeSortByLoop(int[] arr) {
+        // gap 就表示当前待合并的有序数组的长度
+        for (int gap = 1; gap < arr.length; gap *= 2) {
+            // 外层循环
+            // 第一次是把所有长度为 1 的有序数组两两合并
+            // 第二次是把所有长度为 2 的有序数组两两合并
+            // 第三次是把所有长度为 4 的有序数组两两合并
+            for (int i = 0; i < arr.length; i += 2*gap) {
+                // 里层循环执行一次就是让两个 gap 长的相邻数组合并一次
+                // 两个数组分别就是 [left, mid) [mid, right)
+                int left = i;
+                int mid = i + gap;
+                if (mid >= arr.length) {
+                    mid = arr.length;
+                }
+                int right = i + 2 * gap;
+                if (right >= arr.length) {
+                    right = arr.length;
+                }
+                merge(arr, left, mid, right);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int[] arr = {9, 5, 2, 7, 3, 6, 8};
-        quickSortByLoop(arr);
+        mergeSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }

@@ -9,7 +9,6 @@ public class CreateTree {
         public char val;
         public TreeNode left;
         public TreeNode right;
-
         public TreeNode(char val) {
             this.val = val;
         }

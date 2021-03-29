@@ -290,7 +290,7 @@ public class BinaryTree {
     如果 B 在 A 的左侧，那么 B 就是 A 的左子树，
     如果 B 在 A 的右侧，那么 B 就是 A 的右子树，以此类推
      */
-    // 成员变量，index 表示当前访问到 先序 中的第几个元素
+    // 成员变量，index 表示当前访问到先序中的第几个元素
     public int index = 0;
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         // 由于输入的用例可能有多组，所以在方法入口这里把 index 还原成 0，防止多个用例之间干扰
