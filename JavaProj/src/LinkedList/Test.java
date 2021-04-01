@@ -11,7 +11,7 @@ public class Test {
 
     //给定一个链表，返回链表开始入环的第一个节点。如果链表无环，则返回 null
     //结论：从链表的头部出发到达环入口点的距离，
-    //     和从 fast,slow 交汇处出发到达环入口点的距离是一样的
+    //     和从 fast，slow 交汇处出发到达环入口点的距离是一样的
     public ListNode detectCycle(ListNode head) {
         if(head==null||head.next==null){
             return null;
@@ -142,6 +142,7 @@ public class Test {
         }
         return newHead.next;
     }
+
     // 给一定值 x ，编写一段代码将所有小于 x 的结点排在其余结点之前，
     // 且不能改变原来的数据顺序，返回重新排列后的链表的头指针。
     // 处理一般情况，需要创建两个链表，用来保存两部分结果。

@@ -81,6 +81,7 @@ public class MyHashMap {
                 newArray[indexNew] = cur;
             }
         }
+        array=newArray;
     }
     // 负载因子
     private double loadFactor() {
