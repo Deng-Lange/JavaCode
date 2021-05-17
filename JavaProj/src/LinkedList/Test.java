@@ -256,12 +256,13 @@ public class Test {
         ListNode cur=head;
         ListNode newHead=null;
         while(cur!=null){
+            ListNode nextNode = cur.next;
             if(cur.next==null){
                 newHead=cur;
             }
             cur.next=prev;
             prev=cur;
-            cur=cur.next;
+            cur=nextNode;
         }
         return newHead;
     }

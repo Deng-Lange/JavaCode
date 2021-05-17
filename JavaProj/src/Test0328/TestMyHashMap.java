@@ -30,7 +30,6 @@ public class TestMyHashMap {
                 newArray[indexNew]=cur;
             }
         }
-        array=newArray;
     }
     private double loadFactor(){
         return (double)size/array.length;

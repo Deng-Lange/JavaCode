@@ -23,7 +23,7 @@ class MinStack {
     public void push(int x) {
         // 先把 x 插入 A 中.
         A.push(x);
-        // 比较 x 和 B 的栈顶, 看谁小, 谁小就插入谁.
+        // 比较 x 和 B 的栈顶，看谁小，谁小就插入谁
         if (B.isEmpty()) {
             B.push(x);
             return;
@@ -32,7 +32,7 @@ class MinStack {
         if (x < min) {
             min = x;
         }
-        //如果 x>min ，就把 min 再插入到 B 中一遍
+        //如果 x>min，就把 min 再插入到 B 中一遍
         B.push(min);
     }
 

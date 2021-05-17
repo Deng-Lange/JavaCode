@@ -303,7 +303,7 @@ public class BinaryTree {
     // inorder 数组上的这个区间中的内容, 就正是当前子树的中序遍历结果
     public TreeNode _buildTree(int[] preorder, int[] inorder,
                                int inorderLeft, int inorderRight) {
-        if(inorderLeft>inorderRight){
+        if(inorderLeft>=inorderRight){
             //中序区间是一个空区间，说明当前子树是空树
             return null;
         }
