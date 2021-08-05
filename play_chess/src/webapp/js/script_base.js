@@ -53,9 +53,16 @@ websocket.onerror = function () {
 
 // 一会要在不同的流程中进行不同的处理
 // 匹配流程和落子流程处理方式不一样
-// websocket.onmessage = function (event) {
-
-// }
+websocket.onmessage = function (event) {
+    var message = event.data
+    if (message == 'duplicationLogin') {
+        // 该用户已经登陆过
+        alert("您的账号已经被登陆过了!");
+        // window.location.reload();
+        $("#matchButton").attr('disabled', true);
+        $("#screen").text("您的账号已经被登陆过了!")
+    }
+}
 
 // DOM API 前端程序猿要非常熟悉. 后端不需要
 window.onbeforeunload = function () {
@@ -68,7 +75,7 @@ window.onbeforeunload = function () {
 //////////////////////////////////////////////////
 
 // 用户点击 "开始匹配按钮", 就会开始进行匹配
-// 这个函数就是在匹配按钮的点击回调中进行调用的. 
+// 这个函数就是在匹配按钮的点击回调中进行调用的.
 function startMatch(userId) {
     var message = {
         // 在 JS 中操作 JSON 是不需要给 key 加上引号的
@@ -77,9 +84,9 @@ function startMatch(userId) {
     };
     // 通过下面的这个函数来处理服务器返回的匹配响应
     websocket.onmessage = handlerStartMatch;
-    // JSON.stringify 把一个 JS 对象转成 JSON 格式的字符串. 
+    // JSON.stringify 把一个 JS 对象转成 JSON 格式的字符串.
     // 和 Gson.toJson 是同样性质的操作
-    // JS 中如何把 JSON 格式的字符串转成 JS 对象呢? 
+    // JS 中如何把 JSON 格式的字符串转成 JS 对象呢?
     // JSON.parse
     websocket.send(JSON.stringify(message));
 }
@@ -223,7 +230,7 @@ function initGame() {
         //    本地的棋盘不需要关注 "胜负", 胜负是服务器计算的
         //    本地棋盘只需要防止同一个位置被重复落子即可
         //    就简单约定, 已经有子的地方设为 1, 未落子的地方设为 0
-        chessBoard[row][col] = 1;
+        chessBoard[response.row][response.col] = 1;
         // 4. 切换双方的落子顺序
         me = !me;
         // 5. 更新界面, 提示由谁来落子

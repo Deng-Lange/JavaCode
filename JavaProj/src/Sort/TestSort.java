@@ -1,4 +1,4 @@
-package Test0321;
+package Sort;
 
 import java.util.Arrays;
 import java.util.Stack;
@@ -12,9 +12,9 @@ public class TestSort {
 
     //插入排序
     public static void insertSort(int[] arr) {
-        for(int bound=1;bound<arr.length;bound--){
-            int v=arr[bound];
+        for(int bound=1;bound<arr.length;bound++){
             int cur=bound-1;
+            int v=arr[bound];
             for(;cur>=0;cur--){
                 if(arr[cur]>v){
                     arr[cur+1]=arr[cur];
@@ -34,10 +34,10 @@ public class TestSort {
             gap=gap/2;
         }
     }
-    private static void _shellSort(int[] arr, int gap) {
-        for(int bound=gap;bound<arr.length;bound++){
-            int v=arr[bound];
+    public static void _shellSort(int[] arr,int gap){
+        for(int bound=gap;bound<arr.length;bound+=gap){
             int cur=bound-gap;
+            int v=arr[bound];
             for(;cur>=0;cur-=gap){
                 if(arr[cur]>v){
                     arr[cur+gap]=arr[cur];
@@ -51,8 +51,7 @@ public class TestSort {
 
     //选择排序
     public static void selectSort(int[] arr) {
-        int bound=0;
-        for(;bound<arr.length;bound++){
+        for(int bound=0;bound<arr.length;bound++){
             for(int cur=bound+1;cur<arr.length;cur++){
                 if(arr[cur]<arr[bound]){
                     swap(arr,cur,bound);
@@ -63,8 +62,7 @@ public class TestSort {
 
     //冒泡排序
     public static void bubbleSort(int[] arr) {
-        int bound=0;
-        for(;bound<arr.length;bound++){
+        for(int bound=0;bound<arr.length;bound++){
             for(int cur=arr.length-1;cur>bound;cur--){
                 if(arr[cur]<arr[cur-1]){
                     swap(arr,cur,cur-1);
@@ -77,13 +75,18 @@ public class TestSort {
     public static void heapSort(int[] arr) {
         createHeap(arr);
         int heapSize=arr.length;
-        for(int i=0;i<heapSize;i++){
+        for(int i=0;i<arr.length;i++){
             swap(arr,0,heapSize-1);
             heapSize--;
             shiftDown(arr,heapSize,0);
         }
     }
-    public static void shiftDown(int[] arr, int size, int index) {
+    public static void createHeap(int[] arr){
+        for(int i=(arr.length-1-1)/2;i>=0;i--){
+            shiftDown(arr,arr.length,i);
+        }
+    }
+    public static void shiftDown(int[] arr,int size,int index){
         int parent=index;
         int child=2*parent+1;
         while(child<size){
@@ -99,17 +102,12 @@ public class TestSort {
             child=2*parent+1;
         }
     }
-    public static void createHeap(int[] arr) {
-        for(int i=(arr.length-1-1)/2;i>=0;i--){
-            shiftDown(arr,arr.length,i);
-        }
-    }
 
     //快速排序
     public static void quickSort(int[] arr) {
         _quickSort(arr,0,arr.length-1);
     }
-    public static void _quickSort(int[] arr, int left, int right) {
+    public static void _quickSort(int[] arr,int left,int right){
         if(left>=right){
             return;
         }
@@ -117,7 +115,7 @@ public class TestSort {
         _quickSort(arr,left,index-1);
         _quickSort(arr,index+1,right);
     }
-    public static int partition(int[] arr, int left, int right) {
+    public static int partition(int[] arr,int left,int right){
         int v=arr[right];
         int i=left;
         int j=right;
@@ -157,7 +155,7 @@ public class TestSort {
     public static void mergeSort(int[] arr) {
         _mergeSort(arr,0,arr.length);
     }
-    public static void _mergeSort(int[] arr, int left, int right) {
+    public static void _mergeSort(int[] arr,int left,int right){
         if(right-left<=1){
             return;
         }
@@ -166,12 +164,12 @@ public class TestSort {
         _mergeSort(arr,mid,right);
         merge(arr,left,mid,right);
     }
-    public static void merge(int[] arr, int left, int mid, int right) {
+    public static void merge(int[] arr,int left,int mid,int right){
         if(left>=right){
             return;
         }
         int[] tmp=new int[right-left];
-        int tmpSize=tmp.length;
+        int tmpSize=0;
         int l=left;
         int r=mid;
         while(l<mid&&r<right){
@@ -196,10 +194,11 @@ public class TestSort {
             r++;
         }
         for(int i=0;i<tmp.length;i++){
-            arr[left+i]=tmp[i];
+            arr[left+i]=arr[i];
         }
     }
 
+    //归并排序的非递归版本
     public static void mergeSortByLoop(int[] arr) {
         for(int gap=1;gap<arr.length;gap*=2){
             for(int i=0;i<arr.length;i+=2*gap){
@@ -215,5 +214,11 @@ public class TestSort {
                 merge(arr,left,mid,right);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {9, 5, 2, 7, 3, 6, 8};
+        quickSortByLoop(arr);
+        System.out.println(Arrays.toString(arr));
     }
 }

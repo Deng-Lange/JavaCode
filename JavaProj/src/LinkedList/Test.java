@@ -85,30 +85,34 @@ public class Test {
 
     //对于一个链表，判断其是否为回文结构
     public boolean chkPalindrome(ListNode A) {
-        if(A==null||A.next==null){
+        if(A==null){
+            return true;
+        }
+        if(A.next==null){
             return true;
         }
         ListNode newHead=new ListNode(0);
         ListNode newTail=newHead;
         for(ListNode cur=A;cur!=null;cur=cur.next){
-            newTail.next=new ListNode(cur.val);
+            newTail=new ListNode(cur.val);
             newTail=newTail.next;
         }
         ListNode B=newHead.next;
         ListNode prev=null;
         ListNode cur=B;
         while(cur!=null){
-            if(cur.next==null){
+            ListNode next=cur.next;
+            if(next==null){
                 B=cur;
             }
             cur.next=prev;
             prev=cur;
-            cur=cur.next;
+            cur=next;
         }
         ListNode cur1=A;
         ListNode cur2=B;
         while(cur1!=null&&cur2!=null){
-            if(cur1!=cur2){
+            if(cur1.val!=cur2.val){
                 return false;
             }
             cur1=cur1.next;
@@ -154,10 +158,10 @@ public class Test {
         if(pHead.next==null){
             return pHead;
         }
-        ListNode smallHead = new ListNode(0);
-        ListNode smallTail = smallHead;
-        ListNode largeHead = new ListNode(0);
-        ListNode largeTail = largeHead;
+        ListNode smallHead=new ListNode(0);
+        ListNode smallTail=smallHead;
+        ListNode largeHead=new ListNode(0);
+        ListNode largeTail=largeHead;
         for(ListNode cur=pHead;cur!=null;cur=cur.next){
             if(cur.val<x){
                 smallTail.next=new ListNode(cur.val);
@@ -186,24 +190,24 @@ public class Test {
         if(l2==null){
             return l1;
         }
-        ListNode newHead=new ListNode(0);
-        ListNode newTail=newHead;
         ListNode cur1=l1;
         ListNode cur2=l2;
+        ListNode newHead=new ListNode(0);
+        ListNode newTail=newHead;
         while(cur1!=null&&cur2!=null){
             if(cur1.val<cur2.val){
-                newTail.next=new ListNode(cur1.val);
+                newTail.next=cur1;
                 cur1=cur1.next;
             }else{
-                newTail.next=new ListNode(cur2.val);
+                newTail.next=cur2;
                 cur2=cur2.next;
             }
             newTail=newTail.next;
         }
-        if(cur1.next==null){
+        if(cur1==null){
             newTail.next=cur2;
         }
-        if(cur2.next==null){
+        if(cur2==null){
             newTail.next=cur1;
         }
         return newHead.next;
@@ -217,11 +221,11 @@ public class Test {
         if(k<=0){
             return null;
         }
-        int len=getLength(head);
-        if(k>len){
+        int length=getLength(head);
+        if(k>length){
             return null;
         }
-        int steps=len-k;
+        int steps=length-k;
         ListNode cur=head;
         for(int i=0;i<steps;i++){
             cur=cur.next;
@@ -236,8 +240,8 @@ public class Test {
         if(head==null){
             return null;
         }
-        int len=getLength(head);
-        int steps=len/2;
+        int length=getLength(head);
+        int steps=length/2;
         ListNode cur=head;
         for(int i=0;i<steps;i++){
             cur=cur.next;
@@ -252,17 +256,17 @@ public class Test {
         if(head.next==null){
             return head;
         }
-        ListNode prev=null;
-        ListNode cur=head;
         ListNode newHead=null;
-        while(cur!=null){
-            ListNode nextNode = cur.next;
-            if(cur.next==null){
-                newHead=cur;
+        ListNode prevNode=null;
+        ListNode curNode=head;
+        while(curNode!=null){
+            ListNode nextNode=curNode.next;
+            if(nextNode==null){
+                newHead=curNode;
             }
-            cur.next=prev;
-            prev=cur;
-            cur=nextNode;
+            curNode.next=prevNode;
+            prevNode=curNode;
+            curNode=nextNode;
         }
         return newHead;
     }
@@ -272,7 +276,7 @@ public class Test {
             return null;
         }
         ListNode prev=head;
-        ListNode cur=head.next;
+        ListNode cur=prev.next;
         while(cur!=null){
             if(cur.val==val){
                 prev.next=cur.next;
